@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from '@mui/material/Container'
+import { Box } from '@mui/system';
+import Searchbar from './components/Searchbar/Searchbar';
+import VideoDetail from './components/VideoDetail/VideoDetail';
+import VideoList from './components/VideoList/VideoList';
+import youtube from './api/youtube';
+import { useState } from 'react';
 
 function App() {
+  const [videos,setVideos] = useState('');
+
+  const handleSubmit = async () => {
+    const data = await youtube.get('/search',{
+      params:{
+        q: searchTerm
+      } 
+    });
+    console.log(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="xs">
+      <Box>
+        <Searchbar/>
+      </Box>
+      <Box>
+        <VideoDetail/>
+      </Box>
+      <Box>
+        <VideoList/>
+      </Box>
+    </Container>
   );
 }
 
