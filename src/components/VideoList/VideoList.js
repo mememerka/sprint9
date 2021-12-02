@@ -1,17 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './VideoList.css';
 import { Box } from '@mui/system';
 import VideoItem from '../VideoItem/VideoItem';
 
-const VideoList = () => (
-  <Box>
-    <VideoItem/>
-  </Box>
-  );
+const VideoList = ({videos}) => {
 
-VideoList.propTypes = {};
+  const renderedVideos = videos.map((video,index) => <VideoItem video={video}  key={index}/>);
+  
+  return (
+    <Box sx={{
+      display: 'flex',
+      flexFlow: 'column',
+      justifyContent: 'space-around',
+    }}>
+      {renderedVideos}
+    </Box>
+  )
+}
 
-VideoList.defaultProps = {};
 
 export default VideoList;
